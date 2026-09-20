@@ -264,7 +264,6 @@
     }
   </style>
 </head>
-
 <body>
   <div class="page">
 
@@ -282,7 +281,6 @@
     </div>
 
     <div class="card">
-
       <h1>✨ Estrazione del personaggio ✨</h1>
 
       <p class="subtitle">
@@ -291,28 +289,22 @@
 
       <div class="invite-name" id="inviteName"></div>
 
-      <button id="drawBtn" onclick="estrai()">
-        Scopri il personaggio!
-      </button>
+      <button id="drawBtn" onclick="estrai()">Scopri il personaggio!</button>
 
       <div id="spinner"></div>
 
       <div class="magic-line" id="magicLine"></div>
 
       <div id="resultCard">
-
-        <h2 class="result-title">
-          🎉 Il tuo personaggio è...
-        </h2>
+        <h2 class="result-title">🎉 Il tuo personaggio è...</h2>
 
         <div class="result-grid">
 
           <div>
-            <img id="characterImage" src="" alt="Immagine personaggio">
+            <img id="characterImage" src="" alt="Immagine personaggio" />
           </div>
 
           <div>
-
             <h3 id="characterName"></h3>
 
             <p class="quote" id="characterQuote"></p>
@@ -328,7 +320,6 @@
             </div>
 
           </div>
-
         </div>
       </div>
 
@@ -339,7 +330,6 @@
       </div>
 
     </div>
-
   </div>
 
   <script>
@@ -407,7 +397,6 @@
     function loadInviteName() {
 
       const inviteId = getInviteId();
-
       const inviteName = document.getElementById("inviteName");
 
       if (inviteId && assignments[inviteId]) {

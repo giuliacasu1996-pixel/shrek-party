@@ -6,149 +6,349 @@
   <title>Shrek Party - Estrazione personaggio</title>
 
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #b9d98c, #6e9e3a);
-      color: #2d2d2d;
-      text-align: center;
-      padding: 20px;
+    :root {
+      --green-dark: #496b21;
+      --green: #6f9f34;
+      --green-light: #a8c66c;
+      --swamp: #5a7c2d;
+      --brown: #6f4b1f;
+      --brown-dark: #4d3112;
+      --cream: #fff8e8;
+      --gold: #d5b35c;
+      --text: #2f2a22;
     }
 
-    .container {
-      max-width: 700px;
-      margin: 30px auto;
-      background: #fffaf0;
-      border-radius: 24px;
-      padding: 30px 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.15), transparent 30%),
+        linear-gradient(180deg, #aacd72 0%, #7ba445 35%, #5f8330 100%);
+      min-height: 100vh;
+      padding: 24px 16px 50px;
+    }
+
+    .page {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, rgba(255,248,232,0.96), rgba(255,244,219,0.96));
+      border: 5px solid var(--brown);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+      margin-bottom: 26px;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      background: #d8e6bc;
+    }
+
+    .hero-content {
+      padding: 22px 22px 26px;
+      text-align: center;
+    }
+
+    .title-badge {
+      display: inline-block;
+      background: linear-gradient(180deg, #7b5326, #5f3d16);
+      color: #fff6d9;
+      padding: 12px 22px;
+      border-radius: 16px;
+      border: 3px solid #d2b170;
+      box-shadow: inset 0 2px 0 rgba(255,255,255,0.18);
+      font-size: 30px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      margin-top: -8px;
+    }
+
+    .hero-subtitle {
+      margin: 16px auto 0;
+      font-size: 18px;
+      line-height: 1.5;
+      max-width: 720px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,250,239,0.98), rgba(255,245,225,0.98));
+      border: 4px solid #8c6239;
+      border-radius: 26px;
+      padding: 28px 22px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.20), transparent 22%),
+        radial-gradient(circle at 90% 90%, rgba(255,255,255,0.12), transparent 22%);
+      pointer-events: none;
     }
 
     h1 {
-      margin-top: 0;
-      color: #4b6b1f;
+      margin: 0 0 10px;
+      color: var(--green-dark);
+      font-size: 34px;
     }
 
     .subtitle {
-      margin-bottom: 24px;
-      color: #5c5c5c;
+      margin: 0 auto 24px;
+      max-width: 700px;
+      line-height: 1.6;
+      font-size: 18px;
+    }
+
+    .invite-name {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--brown-dark);
+      margin-bottom: 18px;
     }
 
     button {
-      background: #7c4d1e;
-      color: white;
-      border: none;
-      border-radius: 14px;
+      background: linear-gradient(180deg, #7b5326, #5f3d16);
+      color: #fff6de;
+      border: 3px solid #d5b35c;
+      border-radius: 16px;
       padding: 16px 28px;
-      font-size: 18px;
+      font-size: 20px;
+      font-weight: bold;
       cursor: pointer;
-      transition: transform 0.15s ease;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
     button:hover {
-      transform: scale(1.03);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.22);
+    }
+
+    button:disabled {
+      opacity: 0.75;
+      cursor: not-allowed;
     }
 
     #spinner {
-      font-size: 24px;
+      min-height: 44px;
+      margin: 24px 0 8px;
+      font-size: 26px;
       font-weight: bold;
-      min-height: 40px;
-      margin: 25px 0 10px;
-      color: #6b3f16;
+      color: var(--brown);
+    }
+
+    .magic-line {
+      font-style: italic;
+      color: #6c5a3e;
+      margin-bottom: 12px;
     }
 
     #resultCard {
       display: none;
-      margin-top: 25px;
+      margin-top: 26px;
+      text-align: left;
+      background: rgba(255,255,255,0.78);
+      border: 2px solid #d5c29a;
+      border-radius: 20px;
       padding: 20px;
-      border-radius: 18px;
-      background: #fff;
-      border: 2px solid #d8c9a3;
+    }
+
+    .result-title {
+      text-align: center;
+      font-size: 28px;
+      color: var(--green-dark);
+      margin: 0 0 14px;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 20px;
+      align-items: start;
     }
 
     #characterImage {
       width: 100%;
-      max-width: 320px;
       border-radius: 18px;
-      margin: 15px auto;
       display: block;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      object-fit: cover;
+      max-height: 380px;
+      border: 3px solid #ccb280;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+      background: #eef2df;
     }
 
     #characterName {
-      font-size: 30px;
-      color: #4b6b1f;
-      margin: 10px 0;
+      font-size: 34px;
+      color: var(--brown-dark);
+      margin: 0 0 12px;
     }
 
-    .info-block {
-      text-align: left;
-      max-width: 520px;
-      margin: 0 auto;
-      line-height: 1.5;
+    .quote {
+      font-style: italic;
+      font-size: 18px;
+      margin: 0 0 18px;
+      color: #5a523f;
+    }
+
+    .info-box {
+      background: rgba(255,248,232,0.85);
+      border: 1px solid #d8c39a;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      line-height: 1.55;
     }
 
     .label {
+      display: block;
       font-weight: bold;
-      color: #6b3f16;
+      color: var(--green-dark);
+      margin-bottom: 6px;
+      font-size: 17px;
     }
 
     .error {
-      color: darkred;
+      color: #9d1b1b;
       font-weight: bold;
-      margin-top: 20px;
+      margin-top: 18px;
     }
 
-    .small-note {
-      margin-top: 20px;
+    .footer-note {
+      text-align: center;
+      margin-top: 16px;
       font-size: 14px;
-      color: #666;
+      color: #5c5c5c;
+    }
+
+    @media (max-width: 760px) {
+      .hero-image {
+        height: 180px;
+      }
+
+      .title-badge {
+        font-size: 24px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .result-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #characterName {
+        font-size: 30px;
+      }
+
+      #spinner {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🏰 Festa a tema Shrek</h1>
-    <p class="subtitle">Il tuo destino nel regno di Molto Molto Lontano ti aspetta...</p>
+  <div class="page">
 
-    <button id="drawBtn" onclick="estrai()">Estrai il tuo personaggio</button>
-
-    <div id="spinner"></div>
-
-    <div id="resultCard">
-      <h2>🎉 Il tuo personaggio è...</h2>
-      <div id="characterName"></div>
-      <img id="characterImage" src="" alt="Immagine personaggio" />
-      <div class="info-block">
-        <p><span class="label">Dress code:</span> <span id="dressCode"></span></p>
-        <p><span class="label">Idea look:</span> <span id="lookIdea"></span></p>
+    <div class="hero">
+      <img class="hero-image" src="images/collage.jpg" alt="Collage dei personaggi di Shrek">
+      <div class="hero-content">
+        <div class="title-badge">🏰 Shrek Party</div>
+        <p class="hero-subtitle">
+          Benvenuto nel regno di Molto Molto Lontano. Oggi il tuo destino verrà svelato:
+          scoprirai quale personaggio di Shrek dovrai interpretare alla festa!
+        </p>
       </div>
     </div>
 
-    <div id="errorMessage" class="error"></div>
+    <div class="card">
+      <h1>✨ Estrazione del personaggio ✨</h1>
+      <p class="subtitle">
+        Premi il pulsante qui sotto e lascia che la magia decida quale ruolo ti aspetta...
+      </p>
 
-    <p class="small-note">Apri il link che ti è stato inviato e scopri chi sarai alla festa ✨</p>
+      <div class="invite-name" id="inviteName"></div>
+
+      <button id="drawBtn" onclick="estrai()">Scopri il tuo destino</button>
+
+      <div id="spinner"></div>
+      <div class="magic-line" id="magicLine"></div>
+
+      <div id="resultCard">
+        <h2 class="result-title">🎉 Il tuo personaggio è...</h2>
+
+        <div class="result-grid">
+          <div>
+            <img id="characterImage" src="" alt="Immagine personaggio" />
+          </div>
+
+          <div>
+            <h3 id="characterName"></h3>
+            <p class="quote" id="characterQuote"></p>
+
+            <div class="info-box">
+              <span class="label">Dress code</span>
+              <div id="dressCode"></div>
+            </div>
+
+            <div class="info-box">
+              <span class="label">Idea look</span>
+              <div id="lookIdea"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="errorMessage" class="error"></div>
+
+      <div class="footer-note">
+        Preparati a entrare nella favola... più o meno 😄
+      </div>
+    </div>
   </div>
 
   <script>
     const assignments = {
       "gs92": {
+        inviteName: "Giulia Serusi",
         name: "Draghessa",
         image: "images/draghessa.jpg",
-        dressCode: "Look grintoso e scenografico: abito o outfit nero, rosso o viola, dettagli da drago, ali facoltative, make-up intenso.",
-        lookIdea: "Puoi puntare su corna/cerchietto, eyeliner marcato, accessori metallici e un tocco 'regale ma selvaggio'."
+        quote: "Misteriosa, potente e memorabile.",
+        dressCode: "Look scenografico e deciso: nero, rosso, bordeaux o viola. Via libera a dettagli da drago, ali, make-up intenso e accessori d'effetto.",
+        lookIdea: "Cerchietto con corna, eyeliner marcato, abito o outfit dark elegante e un'aria regale ma selvaggia."
       },
       "lu47": {
+        inviteName: "Luigi",
         name: "Ciuchino",
         image: "images/ciuchino.jpg",
-        dressCode: "Outfit comodo sui toni del grigio, beige o marrone chiaro. Perfetti orecchie da asino, coda e aria super simpatica.",
-        lookIdea: "Il pezzo forte è l'energia: sorriso, espressioni buffe e tanta voglia di chiacchierare."
+        quote: "Energia, simpatia e zero silenzi imbarazzanti.",
+        dressCode: "Outfit comodo sui toni del grigio, beige o marrone chiaro. Perfetti orecchie da asino, coda e un'espressione super simpatica.",
+        lookIdea: "Punta tutto sul lato comico: sorriso, entusiasmo, accessori buffi e voglia di chiacchierare con chiunque."
       },
       "as31": {
+        inviteName: "Asia",
         name: "Figlio di Draghessa e Ciuchino",
         image: "images/figlio_draghessa_ciuchino.jpg",
-        dressCode: "Look tenero e fantasioso: base chiara o pastello con dettagli da draghetto, piccole ali, orecchie da ciuchino e tocco giocoso.",
-        lookIdea: "Puoi scegliere uno stile 'baby drago' divertente: ali leggere, coda, accessori colorati e un make-up molto soft."
+        quote: "Un mix adorabile tra fantasia e caos.",
+        dressCode: "Look tenero e creativo: colori chiari o pastello con dettagli da draghetto, piccole ali, orecchie da ciuchino e stile giocoso.",
+        lookIdea: "Versione 'baby fantasy': ali leggere, accessori divertenti, make-up soft e un risultato dolce ma originale."
       }
     };
 
@@ -164,9 +364,28 @@
       "Figlio di Draghessa e Ciuchino"
     ];
 
+    const magicPhrases = [
+      "Lo Specchio Magico sta riflettendo il tuo destino...",
+      "Le creature della palude stanno decidendo...",
+      "Molto Molto Lontano ti sta osservando...",
+      "Le favole si stanno mescolando...",
+      "Il tuo ruolo nella storia sta per essere svelato..."
+    ];
+
     function getInviteId() {
       const params = new URLSearchParams(window.location.search);
       return params.get("id");
+    }
+
+    function loadInviteName() {
+      const inviteId = getInviteId();
+      const inviteName = document.getElementById("inviteName");
+
+      if (inviteId && assignments[inviteId]) {
+        inviteName.textContent = `Ciao ${assignments[inviteId].inviteName}, è arrivato il momento della tua estrazione!`;
+      } else {
+        inviteName.textContent = "Apri il link personale che ti è stato inviato.";
+      }
     }
 
     function estrai() {
@@ -175,12 +394,14 @@
       const resultCard = document.getElementById("resultCard");
       const errorMessage = document.getElementById("errorMessage");
       const drawBtn = document.getElementById("drawBtn");
+      const magicLine = document.getElementById("magicLine");
 
       errorMessage.textContent = "";
       resultCard.style.display = "none";
 
       if (!inviteId || !assignments[inviteId]) {
         spinner.textContent = "";
+        magicLine.textContent = "";
         errorMessage.textContent = "Link non valido o personaggio non trovato.";
         return;
       }
@@ -188,11 +409,14 @@
       drawBtn.disabled = true;
 
       let count = 0;
-      const maxCount = 22;
+      const maxCount = 24;
 
       const interval = setInterval(() => {
         const randomName = animationNames[Math.floor(Math.random() * animationNames.length)];
+        const randomPhrase = magicPhrases[Math.floor(Math.random() * magicPhrases.length)];
+
         spinner.textContent = randomName;
+        magicLine.textContent = randomPhrase;
         count++;
 
         if (count >= maxCount) {
@@ -201,16 +425,22 @@
           const character = assignments[inviteId];
 
           spinner.textContent = "✨ Destino compiuto! ✨";
+          magicLine.textContent = "La tua favola per la festa è stata scelta.";
+
           document.getElementById("characterName").textContent = character.name;
           document.getElementById("characterImage").src = character.image;
           document.getElementById("characterImage").alt = character.name;
+          document.getElementById("characterQuote").textContent = character.quote;
           document.getElementById("dressCode").textContent = character.dressCode;
           document.getElementById("lookIdea").textContent = character.lookIdea;
 
           resultCard.style.display = "block";
+          drawBtn.disabled = false;
         }
-      }, 120);
+      }, 140);
     }
+
+    loadInviteName();
   </script>
 </body>
 </html>

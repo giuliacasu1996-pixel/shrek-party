@@ -264,43 +264,57 @@
     }
   </style>
 </head>
+
 <body>
   <div class="page">
 
     <div class="hero">
       <img class="hero-image" src="images/collage.jpg" alt="Collage dei personaggi di Shrek">
+
       <div class="hero-content">
         <div class="title-badge">🏰 Shrek Party</div>
+
         <p class="hero-subtitle">
-          Benvenuto nel regno di Molto Molto Lontano. Oggi il tuo destino verrà svelato:
+          Benvenuto nel regno di Molto Molto Lontano..... Oggi il tuo destino verrà svelato:
           scoprirai quale personaggio di Shrek dovrai interpretare alla festa!
         </p>
       </div>
     </div>
 
     <div class="card">
+
       <h1>✨ Estrazione del personaggio ✨</h1>
+
       <p class="subtitle">
         Premi il pulsante qui sotto e lascia che la magia decida quale ruolo ti aspetta...
       </p>
 
       <div class="invite-name" id="inviteName"></div>
 
-      <button id="drawBtn" onclick="estrai()">Scopri il tuo destino</button>
+      <button id="drawBtn" onclick="estrai()">
+        Scopri il personaggio!
+      </button>
 
       <div id="spinner"></div>
+
       <div class="magic-line" id="magicLine"></div>
 
       <div id="resultCard">
-        <h2 class="result-title">🎉 Il tuo personaggio è...</h2>
+
+        <h2 class="result-title">
+          🎉 Il tuo personaggio è...
+        </h2>
 
         <div class="result-grid">
+
           <div>
-            <img id="characterImage" src="" alt="Immagine personaggio" />
+            <img id="characterImage" src="" alt="Immagine personaggio">
           </div>
 
           <div>
+
             <h3 id="characterName"></h3>
+
             <p class="quote" id="characterQuote"></p>
 
             <div class="info-box">
@@ -312,7 +326,9 @@
               <span class="label">Idea look</span>
               <div id="lookIdea"></div>
             </div>
+
           </div>
+
         </div>
       </div>
 
@@ -321,11 +337,15 @@
       <div class="footer-note">
         Preparati a entrare nella favola... più o meno 😄
       </div>
+
     </div>
+
   </div>
 
   <script>
+
     const assignments = {
+
       "gs92": {
         inviteName: "Giulia Serusi",
         name: "Draghessa",
@@ -334,6 +354,7 @@
         dressCode: "Look scenografico e deciso: nero, rosso, bordeaux o viola. Via libera a dettagli da drago, ali, make-up intenso e accessori d'effetto.",
         lookIdea: "Cerchietto con corna, eyeliner marcato, abito o outfit dark elegante e un'aria regale ma selvaggia."
       },
+
       "lu47": {
         inviteName: "Luigi",
         name: "Ciuchino",
@@ -342,6 +363,7 @@
         dressCode: "Outfit comodo sui toni del grigio, beige o marrone chiaro. Perfetti orecchie da asino, coda e un'espressione super simpatica.",
         lookIdea: "Punta tutto sul lato comico: sorriso, entusiasmo, accessori buffi e voglia di chiacchierare con chiunque."
       },
+
       "as31": {
         inviteName: "Asia",
         name: "Figlio di Draghessa e Ciuchino",
@@ -350,7 +372,9 @@
         dressCode: "Look tenero e creativo: colori chiari o pastello con dettagli da draghetto, piccole ali, orecchie da ciuchino e stile giocoso.",
         lookIdea: "Versione 'baby fantasy': ali leggere, accessori divertenti, make-up soft e un risultato dolce ma originale."
       }
+
     };
+
 
     const animationNames = [
       "Shrek",
@@ -364,6 +388,7 @@
       "Figlio di Draghessa e Ciuchino"
     ];
 
+
     const magicPhrases = [
       "Lo Specchio Magico sta riflettendo il tuo destino...",
       "Le creature della palude stanno decidendo...",
@@ -372,75 +397,169 @@
       "Il tuo ruolo nella storia sta per essere svelato..."
     ];
 
+
     function getInviteId() {
       const params = new URLSearchParams(window.location.search);
       return params.get("id");
     }
 
+
     function loadInviteName() {
+
       const inviteId = getInviteId();
+
       const inviteName = document.getElementById("inviteName");
 
       if (inviteId && assignments[inviteId]) {
-        inviteName.textContent = `Ciao ${assignments[inviteId].inviteName}, è arrivato il momento della tua estrazione!`;
-      } else {
-        inviteName.textContent = "Apri il link personale che ti è stato inviato.";
+
+        inviteName.textContent =
+          `Ciao ${assignments[inviteId].inviteName}, è arrivato il momento della tua estrazione!`;
+
       }
+
     }
 
+
     function estrai() {
+
       const inviteId = getInviteId();
-      const spinner = document.getElementById("spinner");
-      const resultCard = document.getElementById("resultCard");
-      const errorMessage = document.getElementById("errorMessage");
-      const drawBtn = document.getElementById("drawBtn");
-      const magicLine = document.getElementById("magicLine");
+
+      const spinner =
+        document.getElementById("spinner");
+
+      const resultCard =
+        document.getElementById("resultCard");
+
+      const errorMessage =
+        document.getElementById("errorMessage");
+
+      const drawBtn =
+        document.getElementById("drawBtn");
+
+      const magicLine =
+        document.getElementById("magicLine");
+
 
       errorMessage.textContent = "";
+
       resultCard.style.display = "none";
 
+
       if (!inviteId || !assignments[inviteId]) {
+
         spinner.textContent = "";
+
         magicLine.textContent = "";
-        errorMessage.textContent = "Link non valido o personaggio non trovato.";
+
+        errorMessage.textContent =
+          "Link non valido o personaggio non trovato.";
+
         return;
+
       }
+
 
       drawBtn.disabled = true;
 
+
       let count = 0;
+
       const maxCount = 24;
 
-      const interval = setInterval(() => {
-        const randomName = animationNames[Math.floor(Math.random() * animationNames.length)];
-        const randomPhrase = magicPhrases[Math.floor(Math.random() * magicPhrases.length)];
 
-        spinner.textContent = randomName;
-        magicLine.textContent = randomPhrase;
+      const interval = setInterval(() => {
+
+        const randomName =
+          animationNames[
+            Math.floor(
+              Math.random() * animationNames.length
+            )
+          ];
+
+
+        const randomPhrase =
+          magicPhrases[
+            Math.floor(
+              Math.random() * magicPhrases.length
+            )
+          ];
+
+
+        spinner.textContent =
+          randomName;
+
+
+        magicLine.textContent =
+          randomPhrase;
+
+
         count++;
 
+
         if (count >= maxCount) {
+
           clearInterval(interval);
 
-          const character = assignments[inviteId];
 
-          spinner.textContent = "✨ Destino compiuto! ✨";
-          magicLine.textContent = "La tua favola per la festa è stata scelta.";
+          const character =
+            assignments[inviteId];
 
-          document.getElementById("characterName").textContent = character.name;
-          document.getElementById("characterImage").src = character.image;
-          document.getElementById("characterImage").alt = character.name;
-          document.getElementById("characterQuote").textContent = character.quote;
-          document.getElementById("dressCode").textContent = character.dressCode;
-          document.getElementById("lookIdea").textContent = character.lookIdea;
 
-          resultCard.style.display = "block";
-          drawBtn.disabled = false;
+          spinner.textContent =
+            "✨ Destino compiuto! ✨";
+
+
+          magicLine.textContent =
+            "La tua favola per la festa è stata scelta.";
+
+
+          document.getElementById("characterName")
+            .textContent =
+            character.name;
+
+
+          document.getElementById("characterImage")
+            .src =
+            character.image;
+
+
+          document.getElementById("characterImage")
+            .alt =
+            character.name;
+
+
+          document.getElementById("characterQuote")
+            .textContent =
+            character.quote;
+
+
+          document.getElementById("dressCode")
+            .textContent =
+            character.dressCode;
+
+
+          document.getElementById("lookIdea")
+            .textContent =
+            character.lookIdea;
+
+
+          resultCard.style.display =
+            "block";
+
+
+          drawBtn.disabled =
+            false;
+
         }
+
       }, 140);
+
     }
 
+
     loadInviteName();
+
   </script>
+
 </body>
 </html>
